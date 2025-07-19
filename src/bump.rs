@@ -366,7 +366,6 @@ where
     /// # _ = bump;
     /// ```
     #[must_use]
-    #[rustversion::attr(since(1.83), const)]
     pub fn unallocated() -> Self {
         Self {
             chunk: Cell::new(unsafe { RawChunk::from_header(unallocated_chunk_header().cast()) }),
@@ -601,7 +600,7 @@ where
     ///    bump.alloc(1u64);
     ///    assert!(bump.stats().current_chunk().bump_position().is_aligned_to(8));
     ///    assert_eq!(bump.stats().allocated(), 16);
-    ///    
+    ///
     ///    // allocating a value smaller than the minimum alignment must align the bump pointer
     ///    // after the allocation, resulting in some wasted space
     ///    bump.alloc(1u8);
@@ -646,7 +645,7 @@ where
     ///     // make some allocations that benefit from the higher `MIN_ALIGN` of `8`
     ///     let bar = bump.alloc(0u64);
     ///     assert_eq!(bump.stats().allocated(), 16);
-    ///  
+    ///
     ///     // the bump position will stay aligned to `8`
     ///     bump.alloc(0u8);
     ///     assert_eq!(bump.stats().allocated(), 24);
